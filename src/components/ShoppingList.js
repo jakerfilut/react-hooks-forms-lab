@@ -7,22 +7,29 @@ function ShoppingList({ items, onItemFormSubmit }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [search, setSearch] = useState("")
 
+  const [name, setName] = useState("")
+  const [category, setCategory] = useState("Produce")
+
   function handleCategoryChange(event) {
     setSelectedCategory(event.target.value);
   }
 
   const itemsToDisplay = items.filter((item) => {
-        if (selectedCategory === "All") return true;
-    
-        return item.category === selectedCategory;
-      }).filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
-  
+    if (selectedCategory === "All") return true;
 
+    return item.category === selectedCategory;
+  }).filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
 
   return (
     <div className="ShoppingList">
-      <ItemForm onItemFormSubmit={onItemFormSubmit}/>
-      <Filter onCategoryChange={handleCategoryChange} 
+      <ItemForm onItemFormSubmit={onItemFormSubmit}
+      name={name}
+      setName={setName}
+      category={category}
+      setCategory={setCategory}
+
+      />
+      <Filter onCategoryChange={handleCategoryChange}
       search={search}
       onSearchChange={setSearch}
       />
@@ -36,6 +43,15 @@ function ShoppingList({ items, onItemFormSubmit }) {
 }
 
 export default ShoppingList;
+
+
+
+
+
+
+
+
+
 
 
 
